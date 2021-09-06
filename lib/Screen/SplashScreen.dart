@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/screenutil.dart';
 
 import 'LoginScreen.dart';
 
@@ -16,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     //↓画像の表示時間の設定↓
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 3), () {
       //↓画面遷移のコード↓
       Navigator.pop(context);
       Navigator.push(
@@ -26,16 +25,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ↓screenutilプラグイン使うときにいるやつ↓
-    ScreenUtil.init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Image(
-          image: NetworkImage(
-              'https://www.anicom-sompo.co.jp/special/name_dog/dog_2020/img/1-2-1.png'),
-        ),
-      ),
+          child: Image(
+        width: 100.0,
+        height: 100.0,
+        image: NetworkImage(
+            'https://cdn.dribbble.com/users/25514/avatars/normal/070810be04e642201206c8fbdffcbf8a.png?1455536235'),
+      )),
     );
   }
 }

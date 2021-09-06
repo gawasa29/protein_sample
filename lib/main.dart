@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tinder Clone',
+      title: 'マッチョングアプリ',
       theme: ThemeData(
           primaryColor: Color.fromRGBO(128, 128, 128, 1.0),
           secondaryHeaderColor: Color.fromRGBO(128, 128, 128, 1.0),
