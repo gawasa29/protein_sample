@@ -28,7 +28,7 @@ dependencies:
 
   # Font Awesomeを使えるプラグイン
   # https://pub.dev/packages/font_awesome_flutter
-  font_awesome_flutter: ^8.7.0
+  font_awesome_flutter: ^9.1.0
   
   # チャット用のプラグイン　
   # https://pub.dev/packages/bubble
@@ -45,6 +45,10 @@ dependencies:
   # ティンダースワイププラグイン
   # https://pub.dev/packages/flutter_tindercard
   flutter_tindercard: ^0.1.8
+
+  toggle_switch: ^1.2.0
+  
+
 
 dev_dependencies:
   flutter_test:

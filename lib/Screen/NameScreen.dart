@@ -1,10 +1,12 @@
-// メールアドレス登録画面
-//認証画面
+// 名前を入力画面
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import 'TermsofuseScreen.dart';
 
-class MailScreen extends StatelessWidget {
+class NameScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,7 @@ class MailScreen extends StatelessWidget {
                     Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "メール確認",
+                          "名前",
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w600,
@@ -46,6 +48,59 @@ class MailScreen extends StatelessWidget {
                           )),
                     ]),
                     SizedBox(
+                      height: 66,
+                    ),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "誕生日を入力",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54),
+                        )),
+                    SizedBox(
+                      height: (80.0),
+                    ),
+                    Row(children: <Widget>[
+                      Expanded(
+                          flex: 3,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            cursorColor: Theme.of(context).primaryColor,
+                          )),
+                    ]),
+                    SizedBox(
+                      height: 66,
+                    ),
+                    //toggle_switchプラグインのやつ
+                    ToggleSwitch(
+                    minWidth: 90.0,
+                    minHeight: 70.0,
+                    initialLabelIndex: 2,
+                    cornerRadius: 20.0,
+                    activeFgColor: Colors.white,
+                    inactiveBgColor: Colors.grey,
+                    inactiveFgColor: Colors.white,
+                    totalSwitches: 3,
+                    icons: [
+                      FontAwesomeIcons.mars,
+                      FontAwesomeIcons.venus,
+                      FontAwesomeIcons.transgender
+                    ],
+                    iconSize: 30.0,
+                    borderWidth: 2.0,
+                    borderColor: [Colors.blueGrey],
+                    activeBgColors: [
+                      [Colors.blue],
+                      [Colors.pink],
+                      [Colors.purple]
+                    ],
+                    onToggle: (index) {
+                      print('switched to: $index');
+                    },
+                  ),
+                  SizedBox(
                       height: 66,
                     ),
                     SizedBox(
@@ -70,4 +125,6 @@ class MailScreen extends StatelessWidget {
                   ])),
             ])));
   }
+
+  void setState(Null Function() param0) {}
 }

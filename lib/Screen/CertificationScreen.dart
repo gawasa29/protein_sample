@@ -1,10 +1,8 @@
-// メールアドレス登録画面
 //認証画面
 import 'package:flutter/material.dart';
+import 'package:protein_sample/Screen/MailScreen.dart';
 
-import 'TermsofuseScreen.dart';
-
-class MailScreen extends StatelessWidget {
+class CertificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +26,7 @@ class MailScreen extends StatelessWidget {
                     Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "メール確認",
+                          "認証コード",
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w600,
@@ -44,6 +42,43 @@ class MailScreen extends StatelessWidget {
                             keyboardType: TextInputType.number,
                             cursorColor: Theme.of(context).primaryColor,
                           )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                          flex: 3,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            cursorColor: Theme.of(context).primaryColor,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                          flex: 3,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            cursorColor: Theme.of(context).primaryColor,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          cursorColor: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                          flex: 3,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            cursorColor: Theme.of(context).primaryColor,
+                          ))
                     ]),
                     SizedBox(
                       height: 66,
@@ -59,11 +94,12 @@ class MailScreen extends StatelessWidget {
                           primary: Color.fromRGBO(128, 128, 128, 1.0),
                           onPrimary: Colors.white,
                         ),
-                        onPressed: () {Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>TermsofuseScreen()),
-                          );},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MailScreen()));
+                        },
                         child: const Text('次へ'),
                       ),
                     ),
