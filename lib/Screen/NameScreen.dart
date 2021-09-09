@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import 'InterestScreen.dart';
 import 'TermsofuseScreen.dart';
 
 class NameScreen extends StatelessWidget {
@@ -117,7 +118,7 @@ class NameScreen extends StatelessWidget {
                         onPressed: () {Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>TermsofuseScreen()),
+                                builder: (context) =>InterestScreen()),
                           );},
                         child: const Text('次へ'),
                       ),
@@ -125,6 +126,4 @@ class NameScreen extends StatelessWidget {
                   ])),
             ])));
   }
-
-  void setState(Null Function() param0) {}
 }

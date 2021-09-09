@@ -47,6 +47,7 @@ dependencies:
   flutter_tindercard: ^0.1.8
 
   toggle_switch: ^1.2.0
+  curved_navigation_bar: ^1.0.1
   
 
 
@@ -66,9 +67,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-        - assets/images/
-  #   - images/a_dot_ham.jpeg
+assets:
+    - images/sample.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
