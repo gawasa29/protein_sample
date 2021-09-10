@@ -7,7 +7,6 @@ import 'AddPhotoScreen.dart';
 import 'TermsofuseScreen.dart';
 
 class InterestScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +15,8 @@ class InterestScreen extends StatelessWidget {
           backgroundColor: Colors.white10,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon:
-                  Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+              icon: Icon(Icons.arrow_back_ios_new,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -37,7 +36,7 @@ class InterestScreen extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         )),
-                  SizedBox(
+                    SizedBox(
                       height: 600,
                     ),
                     SizedBox(
@@ -51,11 +50,13 @@ class InterestScreen extends StatelessWidget {
                           primary: Color.fromRGBO(128, 128, 128, 1.0),
                           onPrimary: Colors.white,
                         ),
-                        onPressed: () {Navigator.push(
+                        onPressed: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>AddPhotoScreen()),
-                          );},
+                                builder: (context) => AddPhotoScreen()),
+                          );
+                        },
                         child: const Text('次へ'),
                       ),
                     ),

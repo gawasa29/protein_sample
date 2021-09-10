@@ -1,18 +1,23 @@
 // メインのスワイプ画面
 import 'package:flutter/material.dart';
-class HomePage extends StatelessWidget {
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePagestate createState() => _HomePagestate();
+}
+
+class _HomePagestate extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           child: Text(
-            "THIS IS HOME PAGE",
+            "マッチング画面",
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
-                fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w700),
           ),
         ),

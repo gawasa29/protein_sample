@@ -5,13 +5,13 @@ class IdeaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           child: Text(
-            "THIS IS IDEA PAGE",
+            "プロフィール画面",
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 20,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w700),

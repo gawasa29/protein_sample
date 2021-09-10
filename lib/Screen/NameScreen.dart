@@ -7,7 +7,6 @@ import 'InterestScreen.dart';
 import 'TermsofuseScreen.dart';
 
 class NameScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +15,8 @@ class NameScreen extends StatelessWidget {
           backgroundColor: Colors.white10,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon:
-                  Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+              icon: Icon(Icons.arrow_back_ios_new,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -76,32 +75,32 @@ class NameScreen extends StatelessWidget {
                     ),
                     //toggle_switchプラグインのやつ
                     ToggleSwitch(
-                    minWidth: 90.0,
-                    minHeight: 70.0,
-                    initialLabelIndex: 2,
-                    cornerRadius: 20.0,
-                    activeFgColor: Colors.white,
-                    inactiveBgColor: Colors.grey,
-                    inactiveFgColor: Colors.white,
-                    totalSwitches: 3,
-                    icons: [
-                      FontAwesomeIcons.mars,
-                      FontAwesomeIcons.venus,
-                      FontAwesomeIcons.transgender
-                    ],
-                    iconSize: 30.0,
-                    borderWidth: 2.0,
-                    borderColor: [Colors.blueGrey],
-                    activeBgColors: [
-                      [Colors.blue],
-                      [Colors.pink],
-                      [Colors.purple]
-                    ],
-                    onToggle: (index) {
-                      print('switched to: $index');
-                    },
-                  ),
-                  SizedBox(
+                      minWidth: 90.0,
+                      minHeight: 70.0,
+                      initialLabelIndex: 2,
+                      cornerRadius: 20.0,
+                      activeFgColor: Colors.white,
+                      inactiveBgColor: Colors.grey,
+                      inactiveFgColor: Colors.white,
+                      totalSwitches: 3,
+                      icons: [
+                        FontAwesomeIcons.mars,
+                        FontAwesomeIcons.venus,
+                        FontAwesomeIcons.transgender
+                      ],
+                      iconSize: 30.0,
+                      borderWidth: 2.0,
+                      borderColor: [Colors.blueGrey],
+                      activeBgColors: [
+                        [Colors.blue],
+                        [Colors.pink],
+                        [Colors.purple]
+                      ],
+                      onToggle: (index) {
+                        print('switched to: $index');
+                      },
+                    ),
+                    SizedBox(
                       height: 66,
                     ),
                     SizedBox(
@@ -115,11 +114,13 @@ class NameScreen extends StatelessWidget {
                           primary: Color.fromRGBO(128, 128, 128, 1.0),
                           onPrimary: Colors.white,
                         ),
-                        onPressed: () {Navigator.push(
+                        onPressed: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>InterestScreen()),
-                          );},
+                                builder: (context) => InterestScreen()),
+                          );
+                        },
                         child: const Text('次へ'),
                       ),
                     ),

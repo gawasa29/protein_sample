@@ -11,8 +11,8 @@ class CertificationScreen extends StatelessWidget {
           backgroundColor: Colors.white10,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon:
-                  Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+              icon: Icon(Icons.arrow_back_ios_new,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),

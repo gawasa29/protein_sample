@@ -13,8 +13,8 @@ class MailScreen extends StatelessWidget {
           backgroundColor: Colors.white10,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon:
-                  Icon(Icons.arrow_back, color: Theme.of(context).primaryColor),
+              icon: Icon(Icons.arrow_back_ios_new,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -59,11 +59,13 @@ class MailScreen extends StatelessWidget {
                           primary: Color.fromRGBO(128, 128, 128, 1.0),
                           onPrimary: Colors.white,
                         ),
-                        onPressed: () {Navigator.push(
+                        onPressed: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>TermsofuseScreen()),
-                          );},
+                                builder: (context) => TermsofuseScreen()),
+                          );
+                        },
                         child: const Text('次へ'),
                       ),
                     ),
