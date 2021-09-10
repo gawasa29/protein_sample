@@ -15,8 +15,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final _pageOptions = [
     HomePage(),
-    WorkPage(),
-    IdeaPage()
+    MessagesScreen(),
+    ProfileScreen()
   ]; // listing of all 3 pages index wise
 // changing color as per active index value
 

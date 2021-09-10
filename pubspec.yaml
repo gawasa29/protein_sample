@@ -23,9 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # 画面サイズを調節できるプラグイン
-  # https://pub.dev/packages/flutter_screenutil
-
   # Font Awesomeを使えるプラグイン
   # https://pub.dev/packages/font_awesome_flutter
   font_awesome_flutter: ^9.1.0
@@ -65,10 +62,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
-assets:
-    - images/sample.jpg
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

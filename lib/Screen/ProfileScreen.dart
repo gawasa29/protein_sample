@@ -1,7 +1,7 @@
 // プロフィール画面
 import 'package:flutter/material.dart';
 
-class IdeaPage extends StatelessWidget {
+class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
