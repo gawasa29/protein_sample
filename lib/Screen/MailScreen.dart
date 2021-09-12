@@ -1,5 +1,4 @@
 // メールアドレス登録画面
-//認証画面
 import 'package:flutter/material.dart';
 
 import 'TermsofuseScreen.dart';
