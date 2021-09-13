@@ -27,6 +27,7 @@ class ProfileScreen extends StatelessWidget {
             icon: Icon(Icons.menu),
             onPressed: () {
               showModalBottomSheet(
+                  enableDrag: false,
                   isDismissible: true,
                   context: context,
                   isScrollControlled: true, //trueにしないと、Containerのheightが反映されない
@@ -36,24 +37,7 @@ class ProfileScreen extends StatelessWidget {
                         BorderRadius.vertical(top: Radius.circular(1)),
                   ),
                   builder: (BuildContext context) {
-                    return Container(
-                        height: 500,
-                        child: DraggableScrollableSheet(
-                            maxChildSize: 1.0,
-                            builder: (BuildContext context,
-                                ScrollController scrollController) {
-                              return Container(
-                                color: Colors.blue[100],
-                                child: ListView.builder(
-                                  controller: scrollController,
-                                  itemCount: 25,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return ListTile(title: Text('Item $index'));
-                                  },
-                                ),
-                              );
-                            }));
+                    return setteing();
                   });
             },
           ),
