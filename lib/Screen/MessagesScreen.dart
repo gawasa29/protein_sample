@@ -3,8 +3,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:protein_sample/Screen/ChatScreen.dart';
 import 'package:protein_sample/model/ChatUser.dart';
-
 import 'ChatScreen.dart';
 
 class MessagesScreen extends StatefulWidget {
@@ -28,71 +28,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        // Container(
-        // color: Colors.indigo,
-        // child: Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: <Widget>[
-        //     GestureDetector(
-        //       onTap: () {
-        //         setState(() {
-        //           _messagesSelected = true;
-        //         });
-        //       },
-        //       child: Container(
-        //         padding:
-        //             EdgeInsets.symmetric(horizontal: 115.0, vertical: 20.0),
-        //         child: Text(
-        //           "Messages",
-        //           style: TextStyle(
-        //               fontSize: 50.0,
-        //               fontWeight: FontWeight.w500,
-        //               color: _messagesSelected
-        //                   ? Theme.of(context).primaryColor
-        //                   : Colors.blueGrey.shade200),
-        //         ),
-        //       ),
-        //     ),
-        //     VerticalDivider(
-        //       width: 0,
-        //       thickness: 2,
-        //       endIndent: 20.0,
-        //       indent: 20.0,
-        //       color: Colors.blueGrey.shade100,
-        //     ),
-        //     GestureDetector(
-        //       onTap: () {
-        //         setState(() {
-        //           _messagesSelected = false;
-        //           if (_firstVistToFeed == false) {
-        //             Future.delayed(
-        //                 Duration(
-        //                   seconds: 3,
-        //                 ), () {
-        //               _firstVistToFeed = true;
-        //               setState(() {});
-        //             });
-        //           }
-        //         });
-        //       },
-        //       child: Container(
-        //         padding:
-        //             EdgeInsets.symmetric(horizontal: 150.0, vertical: 20.0),
-        //         child: Text(
-        //           "  Feed  ",
-        //           style: TextStyle(
-        //               fontSize: 50.0,
-        //               fontWeight: FontWeight.w500,
-        //               color: _messagesSelected
-        //                   ? Colors.blueGrey.shade200
-        //                   : Theme.of(context).primaryColor),
-        //         ),
-        //       ),
-        //     )
-        //   ],
-        // ),
-        // ),
-        // Based on which section does it selected .
         _messagesSelected
             ? Expanded(
                 child: ListView(
@@ -170,10 +105,10 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      InChatScreen(user: dummyMsg[index])));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChatScreen()),
+                          );
                         },
                         child: Column(
                           children: <Widget>[

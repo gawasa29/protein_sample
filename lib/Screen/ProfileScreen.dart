@@ -27,17 +27,17 @@ class ProfileScreen extends StatelessWidget {
             icon: Icon(Icons.menu),
             onPressed: () {
               showModalBottomSheet(
-                  enableDrag: false,
-                  isDismissible: true,
                   context: context,
-                  isScrollControlled: true, //trueにしないと、Containerのheightが反映されない
                   shape: RoundedRectangleBorder(
-                    //丸み設定
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(1)),
                   ),
                   builder: (BuildContext context) {
-                    return setteing();
+                    return Navigator(
+                      onGenerateRoute: (context) => MaterialPageRoute<Setteing>(
+                        builder: (context) => Setteing(),
+                      ),
+                    );
                   });
             },
           ),
