@@ -1,12 +1,17 @@
 // 名前を入力画面
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 import 'InterestScreen.dart';
 import 'TermsofuseScreen.dart';
 
-class NameScreen extends StatelessWidget {
+class NameScreen extends StatefulWidget {
+  @override
+  _NameScreenState createState() => _NameScreenState();
+}
+
+class _NameScreenState extends State<NameScreen> {
+  List<bool> _selections = List.generate(3, (_) => false);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,33 +78,36 @@ class NameScreen extends StatelessWidget {
                     SizedBox(
                       height: 66,
                     ),
-                    //toggle_switchプラグインのやつ
-                    ToggleSwitch(
-                      minWidth: 90.0,
-                      minHeight: 70.0,
-                      initialLabelIndex: 2,
-                      cornerRadius: 20.0,
-                      activeFgColor: Colors.white,
-                      inactiveBgColor: Colors.grey,
-                      inactiveFgColor: Colors.white,
-                      totalSwitches: 3,
-                      icons: [
-                        FontAwesomeIcons.mars,
-                        FontAwesomeIcons.venus,
-                        FontAwesomeIcons.transgender
-                      ],
-                      iconSize: 30.0,
-                      borderWidth: 2.0,
-                      borderColor: [Colors.blueGrey],
-                      activeBgColors: [
-                        [Colors.blue],
-                        [Colors.pink],
-                        [Colors.purple]
-                      ],
-                      onToggle: (index) {
-                        print('switched to: $index');
-                      },
-                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(20),
+                        child: ToggleButtons(
+                          children: <Widget>[
+                            Icon(Icons.male_outlined, size: 50),
+                            Icon(Icons.female_outlined, size: 50),
+                            Icon(Icons.transgender_outlined, size: 50),
+                          ],
+                          // renderBorder: false, //アイコンを囲む枠を消す
+                          borderColor: Theme.of(context).accentColor,
+                          selectedBorderColor: Theme.of(context).accentColor,
+                          borderWidth: 30,
+                          borderRadius: BorderRadius.circular(10),
+                          isSelected: _selections,
+                          onPressed: (int index) {
+                            setState(() {
+                              for (int buttonIndex = 0;
+                                  buttonIndex < _selections.length;
+                                  buttonIndex++) {
+                                if (buttonIndex == index) {
+                                  _selections[buttonIndex] =
+                                      !_selections[buttonIndex];
+                                } else {
+                                  _selections[buttonIndex] = false;
+                                }
+                              }
+                            });
+                          },
+                        )),
                     SizedBox(
                       height: 66,
                     ),
