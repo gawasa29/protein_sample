@@ -101,6 +101,7 @@ class _HomePagestate extends State<HomePage>
               SizedBox(
                 height: (40.0),
               ),
+              //おすすめいいね
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -158,8 +159,7 @@ class _HomePagestate extends State<HomePage>
         ),
         ////いいね押したときの画面
         _messagesSelected == false
-            ? new Expanded(
-                child: Column(
+            ? Column(
                 children: <Widget>[
                   new SizedBox(
                     height: (100.0),
@@ -193,7 +193,7 @@ class _HomePagestate extends State<HomePage>
                             color: Colors.grey.shade600)),
                   )
                 ],
-              ))
+              )
             : Align(
                 //tindercardの設定自由に決める場所
                 alignment: Alignment.topCenter,

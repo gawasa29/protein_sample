@@ -1,9 +1,7 @@
 // 名前を入力画面
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'InterestScreen.dart';
-import 'TermsofuseScreen.dart';
 
 class NameScreen extends StatefulWidget {
   @override
