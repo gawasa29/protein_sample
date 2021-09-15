@@ -135,15 +135,6 @@ class _HomePagestate extends State<HomePage>
                     onTap: () {
                       setState(() {
                         _messagesSelected = false;
-                        if (_firstVistToFeed == false) {
-                          Future.delayed(
-                              Duration(
-                                seconds: 3,
-                              ), () {
-                            _firstVistToFeed = true;
-                            setState(() {});
-                          });
-                        }
                       });
                     },
                     child: Container(
@@ -165,60 +156,98 @@ class _HomePagestate extends State<HomePage>
             ],
           ),
         ),
-        Align(
-            //tindercardの設定自由に決める場所
-            alignment: Alignment.topCenter,
-            child: TinderSwapCard(
-              animDuration: 800,
-              //カードの位置
-              orientation: AmassOrientation.BOTTOM,
-              totalNum: peoples.length,
-              //後ろの数(２までしか無理)
-              stackNum: 2,
-              //スワイプの範囲設定
-              swipeEdge: 10.0,
-              maxWidth: MediaQuery.of(context).size.width - 10.0,
-              maxHeight: MediaQuery.of(context).size.height * 0.74,
-              minWidth: MediaQuery.of(context).size.width - 30.0,
-              minHeight: MediaQuery.of(context).size.height * 0.73,
-              cardBuilder: (context, index) {
-                return peoples[index];
-              },
-              cardController: _cardController,
-              swipeUpdateCallback:
-                  (DragUpdateDetails details, Alignment align) {
-                /// Get swiping card's alignment
-                if (align.x < 0) {
-                  //Card is LEFT swiping
-                  print("Left align " + align.x.toString());
-                  setState(() {
-                    if (align.x < -1) atCenter = false;
-                    chng = true;
-                  });
-                } else if (align.x > 0) {
-                  //Card is RIGHT swiping
-                  print("right align " + align.x.toString());
-                  setState(() {
-                    if (align.x > 1) atCenter = false;
-                    chng = false;
-                  });
-                }
-              },
-              swipeCompleteCallback:
-                  (CardSwipeOrientation orientation, int index) {
-                /// Get orientation & index of swiped card!
-                setState(() {
-                  atCenter = true;
-                  if (index == peoples.length - 1) {
-                    _triggerNotFound = true;
-                    Future.delayed(Duration(seconds: 5), () {
-                      _timeout = true;
-                      setState(() {});
+        ////いいね押したときの画面
+        _messagesSelected == false
+            ? new Expanded(
+                child: Column(
+                children: <Widget>[
+                  new SizedBox(
+                    height: (100.0),
+                  ),
+                  new Image(
+                      width: (600),
+                      height: (400),
+                      fit: BoxFit.cover,
+                      image: new AssetImage('assets/images/sorry.png')),
+                  new SizedBox(
+                    height: (50.0),
+                  ),
+                  new Text(
+                    "Check back later",
+                    style: new TextStyle(
+                        wordSpacing: 1.5,
+                        fontSize: (75.0),
+                        fontWeight: FontWeight.w400),
+                  ),
+                  new SizedBox(
+                    height: (20.0),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.symmetric(horizontal: (60.0)),
+                    child: new Text(
+                        "We couldn't find any social activity for your matches. Try again later",
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(
+                            fontSize: (40.0),
+                            fontWeight: FontWeight.w300,
+                            color: Colors.grey.shade600)),
+                  )
+                ],
+              ))
+            : Align(
+                //tindercardの設定自由に決める場所
+                alignment: Alignment.topCenter,
+                child: TinderSwapCard(
+                  animDuration: 800,
+                  //カードの位置
+                  orientation: AmassOrientation.BOTTOM,
+                  totalNum: peoples.length,
+                  //後ろの数(２までしか無理)
+                  stackNum: 2,
+                  //スワイプの範囲設定
+                  swipeEdge: 10.0,
+                  maxWidth: MediaQuery.of(context).size.width - 10.0,
+                  maxHeight: MediaQuery.of(context).size.height * 0.74,
+                  minWidth: MediaQuery.of(context).size.width - 30.0,
+                  minHeight: MediaQuery.of(context).size.height * 0.73,
+                  cardBuilder: (context, index) {
+                    return peoples[index];
+                  },
+                  cardController: _cardController,
+                  swipeUpdateCallback:
+                      (DragUpdateDetails details, Alignment align) {
+                    /// Get swiping card's alignment
+                    if (align.x < 0) {
+                      //Card is LEFT swiping
+                      print("Left align " + align.x.toString());
+                      setState(() {
+                        if (align.x < -1) atCenter = false;
+                        chng = true;
+                      });
+                    } else if (align.x > 0) {
+                      //Card is RIGHT swiping
+                      print("right align " + align.x.toString());
+                      setState(() {
+                        if (align.x > 1) atCenter = false;
+                        chng = false;
+                      });
+                    }
+                  },
+                  swipeCompleteCallback:
+                      (CardSwipeOrientation orientation, int index) {
+                    /// Get orientation & index of swiped card!
+                    setState(() {
+                      atCenter = true;
+                      if (index == peoples.length - 1) {
+                        _triggerNotFound = true;
+                        Future.delayed(Duration(seconds: 5), () {
+                          _timeout = true;
+                          setState(() {});
+                        });
+                      }
                     });
-                  }
-                });
-              },
-            )),
+                  },
+                )),
       ],
     );
   }

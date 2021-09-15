@@ -92,6 +92,7 @@ class AddPhotoScreen extends StatelessWidget {
   }
 }
 
+//写真選択画面
 enum ImageSourceType { gallery, camera }
 
 class ImageFromGalleryEx extends StatefulWidget {
