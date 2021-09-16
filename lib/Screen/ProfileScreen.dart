@@ -1,6 +1,11 @@
 // プロフィール画面
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:protein_sample/Picker/PickerAge.dart';
+import 'package:protein_sample/Picker/PickerBody.dart';
+import 'package:protein_sample/Picker/PickerFrom.dart';
+import 'package:protein_sample/Picker/PickerHeight.dart';
 
 import 'Setting.dart';
 
@@ -85,39 +90,46 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(height: 20.0),
                   Divider(
                     height: 20,
-                    thickness: 5,
-                    indent: 20,
-                    endIndent: 20,
+                    thickness: 0.5,
+                    indent: 1,
+                    endIndent: 1,
                   ),
                   Align(
                       alignment: Alignment(-0.8, 0),
                       child: Text(
                         "プロフィール",
                         style: TextStyle(
-                            fontSize: 25,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.black54),
                       )),
-                  TextButton(
-                    child: const Text('Button'),
-                    style: TextButton.styleFrom(
-                      primary: Colors.black,
-                    ),
-                    onPressed: () {},
+                  introAge(),
+                  Divider(
+                    height: 0.1,
+                    thickness: 0.5,
+                    indent: 1,
+                    endIndent: 1,
                   ),
-                  TextButton(
-                    child: const Text('Button'),
-                    style: TextButton.styleFrom(
-                      primary: Colors.black,
-                    ),
-                    onPressed: () {},
+                  introBody(),
+                  Divider(
+                    height: 0.1,
+                    thickness: 0.5,
+                    indent: 1,
+                    endIndent: 1,
                   ),
-                  TextButton(
-                    child: const Text('Button'),
-                    style: TextButton.styleFrom(
-                      primary: Colors.black,
-                    ),
-                    onPressed: () {},
+                  introFrom(),
+                  Divider(
+                    height: 0.1,
+                    thickness: 0.5,
+                    indent: 1,
+                    endIndent: 1,
+                  ),
+                  introHeight(),
+                  Divider(
+                    height: 0.1,
+                    thickness: 0.5,
+                    indent: 1,
+                    endIndent: 1,
                   ),
                 ],
               ),
@@ -128,23 +140,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-// LimitedBox(
-//                     maxHeight: 300, // 高さ指定
-//                     child: ListView(
-//                       children: <Widget>[
-//                         ListTile(
-//                           leading: Icon(Icons.map),
-//                           title: Text('Map'),
-//                         ),
-//                         ListTile(
-//                           leading: Icon(Icons.photo_album),
-//                           title: Text('Album'),
-//                         ),
-//                         ListTile(
-//                           leading: Icon(Icons.phone),
-//                           title: Text('Phone'),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
