@@ -1,10 +1,9 @@
 //チャット前の画面
-import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:protein_sample/Screen/ChatScreen.dart';
 import 'package:protein_sample/model/ChatUser.dart';
+
 import 'ChatScreen.dart';
 
 class MessagesScreen extends StatefulWidget {
@@ -78,8 +77,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                   ),
                   Divider(
                     height: 1,
-                    thickness: 2,
-                    color: Colors.red,
+                    thickness: 0.5,
                   ),
                   SizedBox(
                     height: 15.0,

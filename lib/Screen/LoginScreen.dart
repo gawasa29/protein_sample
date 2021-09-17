@@ -1,4 +1,5 @@
 // サインアップの初期画面
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -56,12 +57,51 @@ class _LoginScreenState extends State<LoginScreen> {
                 primary: Color.fromRGBO(128, 128, 128, 1.0),
                 onPrimary: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => gawasa()),
+                );
+              },
               child: const Text('ログイン'),
             ),
           ),
         ],
       ),
     ));
+  }
+}
+
+class gawasa extends StatelessWidget {
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('books').snapshots(); //booksは
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Bookテスト'),
+      ),
+      body: Center(
+          child: StreamBuilder<QuerySnapshot>(
+        stream: _usersStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          return ListView(
+            children: snapshot.data!.docs.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data()! as Map<String, dynamic>;
+              return ListTile(
+                title: Text(data['title']),
+                subtitle: Text(data['author']),
+              );
+            }).toList(),
+          );
+        },
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }

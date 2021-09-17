@@ -1,7 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'Screen/SplashScreen.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -13,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Color.fromRGBO(128, 128, 128, 1.0),
           secondaryHeaderColor: Color.fromRGBO(128, 128, 128, 1.0),
-          accentColor: Color.fromRGBO(250, 250, 250, 1.0)),
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(secondary: Color.fromRGBO(250, 250, 250, 1.0))),
       home: SplashScreen(),
     );
   }
