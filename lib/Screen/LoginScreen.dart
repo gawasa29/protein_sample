@@ -1,6 +1,6 @@
 // サインアップの初期画面
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'PhoneScreen.dart';
@@ -12,7 +12,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
-
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,12 +66,42 @@ class _LoginScreenState extends State<LoginScreen> {
               child: const Text('ログイン'),
             ),
           ),
+          SizedBox(
+            height: 50,
+            width: 300,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                primary: Color.fromRGBO(128, 128, 128, 1.0),
+                onPrimary: Colors.white,
+              ),
+              onPressed: () async {
+                try {
+                  UserCredential userCredential = await FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                          email: "barry.allen@example.com",
+                          password: "SuperSecretPassword!");
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'weak-password') {
+                    print('The password provided is too weak.');
+                  } else if (e.code == 'email-already-in-use') {
+                    print('The account already exists for that email.');
+                  }
+                } catch (e) {
+                  print(e);
+                }
+              },
+              child: const Text('お試し'),
+            ),
+          ),
         ],
       ),
     ));
   }
 }
 
+//クラウドファイアストア
 class gawasa extends StatelessWidget {
   final Stream<QuerySnapshot> _usersStream =
       FirebaseFirestore.instance.collection('books').snapshots(); //booksは
@@ -105,3 +135,8 @@ class gawasa extends StatelessWidget {
     );
   }
 }
+
+
+
+
+//ログイン画面試し
