@@ -103,7 +103,6 @@ class _MailScreenState extends State<MailScreen> {
                               email: newUserEmail,
                               password: newUserPassword,
                             );
-
                             // 登録したユーザー情報
                             final User user = result.user!;
                             setState(() {
