@@ -1,9 +1,23 @@
 // メールアドレス登録画面
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'TermsofuseScreen.dart';
 
-class MailScreen extends StatelessWidget {
+class MailScreen extends StatefulWidget {
+  const MailScreen({Key? key}) : super(key: key);
+
+  @override
+  _MailScreenState createState() => _MailScreenState();
+}
+
+class _MailScreenState extends State<MailScreen> {
+  // 入力されたメールアドレス
+  String newUserEmail = "";
+  // 入力されたパスワード
+  String newUserPassword = "";
+  // 登録・ログインに関する情報を表示
+  String infoText = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +52,33 @@ class MailScreen extends StatelessWidget {
                     ),
                     Row(children: <Widget>[
                       Expanded(
-                          flex: 3,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            cursorColor: Theme.of(context).primaryColor,
-                          )),
+                        flex: 3,
+                        child: TextFormField(
+                          // テキスト入力のラベルを設定
+                          decoration: InputDecoration(labelText: "メールアドレス"),
+                          onChanged: (String value) {
+                            setState(() {
+                              newUserEmail = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ]),
+                    Row(children: <Widget>[
+                      Expanded(
+                        flex: 3,
+                        child: TextFormField(
+                          decoration:
+                              InputDecoration(labelText: "パスワード（６文字以上）"),
+                          // パスワードが見えないようにする
+                          obscureText: true,
+                          onChanged: (String value) {
+                            setState(() {
+                              newUserPassword = value;
+                            });
+                          },
+                        ),
+                      ),
                     ]),
                     SizedBox(
                       height: 66,
@@ -58,7 +94,27 @@ class MailScreen extends StatelessWidget {
                           primary: Color.fromRGBO(128, 128, 128, 1.0),
                           onPrimary: Colors.white,
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          try {
+                            // メール/パスワードでユーザー登録
+                            final FirebaseAuth auth = FirebaseAuth.instance;
+                            final UserCredential result =
+                                await auth.createUserWithEmailAndPassword(
+                              email: newUserEmail,
+                              password: newUserPassword,
+                            );
+
+                            // 登録したユーザー情報
+                            final User user = result.user!;
+                            setState(() {
+                              infoText = "登録OK：${user.email}";
+                            });
+                          } catch (e) {
+                            // 登録に失敗した場合
+                            setState(() {
+                              infoText = "登録NG：${e.toString()}";
+                            });
+                          }
                           Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:protein_sample/Screen/CertificationScreen.dart';
 
 class PhoneNumberScreen extends StatelessWidget {
+  String gawa = "マジかい";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +59,9 @@ class PhoneNumberScreen extends StatelessWidget {
                             keyboardType: TextInputType.number,
                             cursorColor: Theme.of(context).primaryColor,
                             decoration: InputDecoration(helperText: '電話番号'),
+                            onChanged: (yoma) {
+                              gawa = yoma;
+                            },
                           ))
                     ]),
                     SizedBox(

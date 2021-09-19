@@ -1,8 +1,8 @@
 // 利用規約画面
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'NameScreen.dart';
-import 'PhoneScreen.dart';
 
 class TermsofuseScreen extends StatelessWidget {
   const TermsofuseScreen({Key? key}) : super(key: key);
