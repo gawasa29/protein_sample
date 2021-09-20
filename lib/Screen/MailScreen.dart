@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 
 import 'TermsofuseScreen.dart';
 
+// 入力されたメールアドレス
+String newUserEmail = "";
+// 入力されたパスワード
+String newUserPassword = "";
+// 登録・ログインに関する情報を表示
+String infoText = "";
+
 class MailScreen extends StatefulWidget {
   const MailScreen({Key? key}) : super(key: key);
 
@@ -12,12 +19,6 @@ class MailScreen extends StatefulWidget {
 }
 
 class _MailScreenState extends State<MailScreen> {
-  // 入力されたメールアドレス
-  String newUserEmail = "";
-  // 入力されたパスワード
-  String newUserPassword = "";
-  // 登録・ログインに関する情報を表示
-  String infoText = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +42,7 @@ class _MailScreenState extends State<MailScreen> {
                     Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "メール確認",
+                          "メールアドレス登録",
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w600,
@@ -103,6 +104,9 @@ class _MailScreenState extends State<MailScreen> {
                               email: newUserEmail,
                               password: newUserPassword,
                             );
+                            //メール確認コード
+                            await FirebaseAuth.instance.currentUser!
+                                .sendEmailVerification();
                             // 登録したユーザー情報
                             final User user = result.user!;
                             setState(() {
@@ -117,7 +121,7 @@ class _MailScreenState extends State<MailScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => TermsofuseScreen()),
+                                builder: (context) => EmailCheckScreen()),
                           );
                         },
                         child: const Text('次へ'),
@@ -125,5 +129,62 @@ class _MailScreenState extends State<MailScreen> {
                     ),
                   ])),
             ])));
+  }
+}
+
+//メール確認画面
+class EmailCheckScreen extends StatefulWidget {
+  const EmailCheckScreen({Key? key}) : super(key: key);
+
+  @override
+  _EmailCheckScreenState createState() => _EmailCheckScreenState();
+}
+
+class _EmailCheckScreenState extends State<EmailCheckScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("がわs"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            ElevatedButton(
+              child: const Text('Button'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.orange,
+                onPrimary: Colors.white,
+              ),
+              onPressed: () async {
+                try {
+                  UserCredential userCredential =
+                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    email: newUserEmail,
+                    password: newUserPassword,
+                  );
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TermsofuseScreen(),
+                      ));
+                } catch (e) {
+                  print('NG');
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }
