@@ -112,17 +112,17 @@ class _MailScreenState extends State<MailScreen> {
                             setState(() {
                               infoText = "登録OK：${user.email}";
                             });
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EmailCheckScreen()),
+                            );
                           } catch (e) {
                             // 登録に失敗した場合
                             setState(() {
                               infoText = "登録NG：${e.toString()}";
                             });
                           }
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EmailCheckScreen()),
-                          );
                         },
                         child: const Text('次へ'),
                       ),
@@ -135,12 +135,12 @@ class _MailScreenState extends State<MailScreen> {
 //メール確認画面
 class EmailCheckScreen extends StatefulWidget {
   const EmailCheckScreen({Key? key}) : super(key: key);
-
   @override
   _EmailCheckScreenState createState() => _EmailCheckScreenState();
 }
 
 class _EmailCheckScreenState extends State<EmailCheckScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,9 +151,6 @@ class _EmailCheckScreenState extends State<EmailCheckScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
             ElevatedButton(
               child: const Text('Button'),
               style: ElevatedButton.styleFrom(
@@ -167,11 +164,16 @@ class _EmailCheckScreenState extends State<EmailCheckScreen> {
                     email: newUserEmail,
                     password: newUserPassword,
                   );
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TermsofuseScreen(),
-                      ));
+                  print(userCredential.user?.emailVerified);
+                  if (userCredential.user!.emailVerified) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TermsofuseScreen(),
+                        ));
+                  } else {
+                    print("失敗");
+                  }
                 } catch (e) {
                   print('NG');
                 }

@@ -2,15 +2,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:protein_sample/HomePage.dart';
+import 'package:protein_sample/Screen/MailScreen.dart';
 
-import 'PhoneScreen.dart';
-
-class LoginScreen extends StatefulWidget {
+class TopScreen extends StatefulWidget {
+  const TopScreen({Key? key}) : super(key: key);
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _TopScreenState createState() => _TopScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _TopScreenState extends State<TopScreen> {
   GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   //初期化とインスタンスするコード
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PhoneNumberScreen()),
+                  MaterialPageRoute(builder: (context) => MailScreen()),
                 );
               },
               child: const Text('登録'),
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => gawasa()),
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               },
               child: const Text('ログイン'),
@@ -74,14 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 //ログイン入力画面
-class gawasa extends StatefulWidget {
-  const gawasa({Key? key}) : super(key: key);
 
+class LoginScreen extends StatefulWidget {
   @override
-  _gawasaState createState() => _gawasaState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _gawasaState extends State<gawasa> {
+class _LoginScreenState extends State<LoginScreen> {
   // 入力されたメールアドレス
   String LoginUserEmail = "";
   // 入力されたパスワード

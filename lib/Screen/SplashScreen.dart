@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'LoginScreen.dart';
+import 'TopScreen.dart';
 
 //最初一瞬の表示ページ
 class SplashScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //↓画面遷移のコード↓
       Navigator.pop(context);
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          context, MaterialPageRoute(builder: (context) => TopScreen()));
     });
   }
 
@@ -32,8 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: 100.0,
         height: 100.0,
         image: NetworkImage(
-            'https://cdn.dribbble.com/users/25514/avatars/normal/070810be04e642201206c8fbdffcbf8a.png?1455536235'
-            ),
+            'https://cdn.dribbble.com/users/25514/avatars/normal/070810be04e642201206c8fbdffcbf8a.png?1455536235'),
       )),
     );
   }
