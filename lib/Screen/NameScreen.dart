@@ -1,5 +1,8 @@
 // 名前を入力画面
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import 'InterestScreen.dart';
 
@@ -9,7 +12,16 @@ class NameScreen extends StatefulWidget {
 }
 
 class _NameScreenState extends State<NameScreen> {
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('books').snapshots();
   List<bool> _selections = List.generate(3, (_) => false);
+  //入力された名前
+  String name = "";
+  //入力された誕生日
+  String birthday = "";
+  //性別識別番号
+  int genders = 1000;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,11 +56,18 @@ class _NameScreenState extends State<NameScreen> {
                     ),
                     Row(children: <Widget>[
                       Expanded(
-                          flex: 3,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            cursorColor: Theme.of(context).primaryColor,
-                          )),
+                        flex: 3,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: '名前',
+                          ),
+                          onChanged: (String value) {
+                            setState(() {
+                              name = value;
+                            });
+                          },
+                        ),
+                      ),
                     ]),
                     SizedBox(
                       height: 66,
@@ -67,45 +86,58 @@ class _NameScreenState extends State<NameScreen> {
                     ),
                     Row(children: <Widget>[
                       Expanded(
-                          flex: 3,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            cursorColor: Theme.of(context).primaryColor,
-                          )),
+                        flex: 3,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: '誕生日',
+                          ),
+                          onChanged: (String value) {
+                            setState(() {
+                              birthday = value;
+                            });
+                          },
+                        ),
+                      ),
                     ]),
                     SizedBox(
                       height: 66,
                     ),
-                    Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.all(20),
-                        child: ToggleButtons(
-                          children: <Widget>[
-                            Icon(Icons.male_outlined, size: 50),
-                            Icon(Icons.female_outlined, size: 50),
-                            Icon(Icons.transgender_outlined, size: 50),
-                          ],
-                          // renderBorder: false, //アイコンを囲む枠を消す
-                          borderColor: Theme.of(context).accentColor,
-                          selectedBorderColor: Theme.of(context).accentColor,
-                          borderWidth: 30,
-                          borderRadius: BorderRadius.circular(10),
-                          isSelected: _selections,
-                          onPressed: (int index) {
-                            setState(() {
-                              for (int buttonIndex = 0;
-                                  buttonIndex < _selections.length;
-                                  buttonIndex++) {
-                                if (buttonIndex == index) {
-                                  _selections[buttonIndex] =
-                                      !_selections[buttonIndex];
-                                } else {
-                                  _selections[buttonIndex] = false;
-                                }
-                              }
-                            });
-                          },
-                        )),
+                    ToggleSwitch(
+                      minWidth: 90.0,
+                      minHeight: 70.0,
+                      initialLabelIndex: 2,
+                      cornerRadius: 20.0,
+                      activeFgColor: Colors.white,
+                      inactiveBgColor: Colors.grey,
+                      inactiveFgColor: Colors.white,
+                      totalSwitches: 3,
+                      icons: [
+                        FontAwesomeIcons.mars,
+                        FontAwesomeIcons.venus,
+                        FontAwesomeIcons.transgender
+                      ],
+                      iconSize: 30.0,
+                      borderWidth: 2.0,
+                      borderColor: [Colors.blueGrey],
+                      activeBgColors: [
+                        [Colors.blue],
+                        [Colors.pink],
+                        [Colors.purple]
+                      ],
+                      onToggle: (index) {
+                        print('switched to: $index');
+                        if (index == 0) {
+                          print("男です");
+                        } else if (index == 1) {
+                          print("女です");
+                        } else if (index == 2) {
+                          print("おかまちゃん");
+                        } else {
+                          print("お前誰やねん");
+                        }
+                        genders = index;
+                      },
+                    ),
                     SizedBox(
                       height: 66,
                     ),
@@ -129,6 +161,23 @@ class _NameScreenState extends State<NameScreen> {
                         },
                         child: const Text('次へ'),
                       ),
+                    ),
+                    ElevatedButton(
+                      child: const Text('Button'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.orange,
+                        onPrimary: Colors.white,
+                      ),
+                      onPressed: () async {
+                        //cloud_firestoreに追加のコード
+                        await FirebaseFirestore.instance
+                            .collection('books')
+                            .add({
+                          'マジが': name,
+                          'マギカ': birthday,
+                          '性別': genders,
+                        });
+                      },
                     ),
                   ])),
             ])));

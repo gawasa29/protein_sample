@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:protein_sample/HomePage.dart';
 import 'package:protein_sample/Screen/MailScreen.dart';
 
+import 'NameScreen.dart';
+
 class TopScreen extends StatefulWidget {
   const TopScreen({Key? key}) : super(key: key);
   @override
@@ -66,6 +68,19 @@ class _TopScreenState extends State<TopScreen> {
               },
               child: const Text('ログイン'),
             ),
+          ),
+          ElevatedButton(
+            child: const Text('Button'),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.orange,
+              onPrimary: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NameScreen()),
+              );
+            },
           ),
         ],
       ),
