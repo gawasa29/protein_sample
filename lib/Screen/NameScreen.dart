@@ -173,8 +173,8 @@ class _NameScreenState extends State<NameScreen> {
                         await FirebaseFirestore.instance
                             .collection('books')
                             .add({
-                          'マジが': name,
-                          'マギカ': birthday,
+                          '名前': name,
+                          '誕生日': birthday,
                           '性別': genders,
                         });
                       },
