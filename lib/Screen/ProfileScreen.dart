@@ -70,10 +70,18 @@ class ProfileScreen extends StatelessWidget {
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mona_Lisa_detail_face.jpg/420px-Mona_Lisa_detail_face.jpg"),
                   ),
                   SizedBox(height: 20.0),
-                  Text(
-                    "モナリザ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  FutureBuilder<DocumentSnapshot>(
+                    //プロフィール名前欄
+                    future: FirebaseFirestore.instance
+                        .collection('books')
+                        .doc('6ldUGwjUOcGQyPJ0J95S')
+                        .get(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      Map<String, dynamic> data =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      return Text(data['名前']);
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
