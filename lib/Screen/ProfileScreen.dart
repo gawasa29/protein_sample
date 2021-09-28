@@ -34,6 +34,7 @@ class ProfileScreen extends StatelessWidget {
             color: Colors.black,
             icon: Icon(Icons.menu),
             onPressed: () {
+              //下から出てくるやつ
               showModalBottomSheet(
                   context: context,
                   shape: RoundedRectangleBorder(

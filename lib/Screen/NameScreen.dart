@@ -1,5 +1,6 @@
 // 名前を入力画面
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -21,6 +22,8 @@ class _NameScreenState extends State<NameScreen> {
   String birthday = "";
   //性別識別番号
   int genders = 1000;
+  //メールアドレスのuidを変数に代入
+  String id = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +176,7 @@ class _NameScreenState extends State<NameScreen> {
                         await FirebaseFirestore.instance
                             .collection('users')
                             .add({
+                          'UID': id,
                           '名前': name,
                           '誕生日': birthday,
                           '性別': genders,

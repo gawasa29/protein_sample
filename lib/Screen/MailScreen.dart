@@ -117,6 +117,7 @@ class _MailScreenState extends State<MailScreen> {
                                 .sendEmailVerification();
                             // 登録したユーザー情報
                             final User user = result.user!;
+                            print(user);
                             setState(() {
                               infoText = "登録OK：${user.email}";
                             });
