@@ -1,4 +1,5 @@
 // 利用規約画面
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,16 @@ class TermsofuseScreen extends StatelessWidget {
               ),
               SizedBox(
                 height: 20,
+              ),
+              ElevatedButton(
+                child: const Text('Button'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orange,
+                  onPrimary: Colors.white,
+                ),
+                onPressed: () {
+                  print(FirebaseAuth.instance.currentUser!.uid);
+                },
               ),
             ],
           ),

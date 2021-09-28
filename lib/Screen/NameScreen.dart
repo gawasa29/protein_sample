@@ -7,6 +7,9 @@ import 'package:toggle_switch/toggle_switch.dart';
 
 import 'InterestScreen.dart';
 
+//メールアドレスのuidを変数に代入
+String users_id = FirebaseAuth.instance.currentUser!.uid;
+
 class NameScreen extends StatefulWidget {
   @override
   _NameScreenState createState() => _NameScreenState();
@@ -22,8 +25,6 @@ class _NameScreenState extends State<NameScreen> {
   String birthday = "";
   //性別識別番号
   int genders = 1000;
-  //メールアドレスのuidを変数に代入
-  String id = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +181,7 @@ class _NameScreenState extends State<NameScreen> {
                         };
                         await FirebaseFirestore.instance
                             .collection("users")
-                            .doc(id)
+                            .doc(users_id)
                             .set(data);
                       },
                     ),

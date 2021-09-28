@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:protein_sample/Screen/NameScreen.dart';
 import 'package:protein_sample/model/picker_list.dart';
 
 class introAge extends StatefulWidget {
@@ -57,11 +59,18 @@ class introduce extends State<introAge> {
                           ),
                           CupertinoButton(
                             child: Text("決定"),
-                            onPressed: () {
+                            onPressed: () async {
+                              _initialAge = _selectedAge;
+                              await FirebaseFirestore.instance
+                                  .collection("users")
+                                  .doc(users_id)
+                                  .set(
+                                {"年齢": _initialAge},
+                                //既存のドキュメントに追加するために必要なコード
+                                SetOptions(merge: true),
+                              );
                               Navigator.pop(context);
-                              setState(() {
-                                _initialAge = _selectedAge;
-                              });
+                              setState(() {});
                             },
                           ),
                         ],

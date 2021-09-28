@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:protein_sample/Screen/NameScreen.dart';
 import 'package:protein_sample/model/picker_list.dart';
 
 class introBody extends StatefulWidget {
@@ -57,11 +59,18 @@ class introduce extends State<introBody> {
                           ),
                           CupertinoButton(
                             child: Text("決定"),
-                            onPressed: () {
+                            onPressed: () async {
+                              _initialBody = _selectedBody;
+                              await FirebaseFirestore.instance
+                                  .collection("users")
+                                  .doc(users_id)
+                                  .set(
+                                {"体型": _initialBody},
+                                //既存のコレクション
+                                SetOptions(merge: true),
+                              );
                               Navigator.pop(context);
-                              setState(() {
-                                _initialBody = _selectedBody;
-                              });
+                              setState(() {});
                             },
                           ),
                         ],

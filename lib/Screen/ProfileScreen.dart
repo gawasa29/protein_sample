@@ -7,6 +7,7 @@ import 'package:protein_sample/Picker/PickerAge.dart';
 import 'package:protein_sample/Picker/PickerBody.dart';
 import 'package:protein_sample/Picker/PickerFrom.dart';
 import 'package:protein_sample/Picker/PickerHeight.dart';
+import 'package:protein_sample/Screen/NameScreen.dart';
 
 import 'Setting.dart';
 
@@ -56,8 +57,7 @@ class ProfileScreen extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Container(
-              //スクロールの高さ指定↓
-              height: 900,
+              //スクロールの高さ指定
               child: Column(
                 children: <Widget>[
                   SizedBox(
@@ -73,12 +73,16 @@ class ProfileScreen extends StatelessWidget {
                     //プロフィール名前欄
                     future: FirebaseFirestore.instance
                         .collection('users')
-                        .doc('qXKVVw4HtyYJCN3IvOkK')
+                        .doc(users_id)
                         .get(),
                     builder: (BuildContext context,
                         AsyncSnapshot<DocumentSnapshot> snapshot) {
                       Map<String, dynamic> data =
-                          snapshot.data!.data() as Map<String, dynamic>;
+                          snapshot.data?.data() as Map<String, dynamic>;
+                      //ヌルの場合サークルがクルクル回る
+                      if (data == null) {
+                        return CircularProgressIndicator();
+                      }
                       return Text(data['名前']);
                     },
                   ),
