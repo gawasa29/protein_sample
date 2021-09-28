@@ -173,14 +173,15 @@ class _NameScreenState extends State<NameScreen> {
                       ),
                       onPressed: () async {
                         //cloud_firestoreに追加のコード
-                        await FirebaseFirestore.instance
-                            .collection('users')
-                            .add({
-                          'UID': id,
+                        Map<String, dynamic> data = <String, dynamic>{
                           '名前': name,
                           '誕生日': birthday,
                           '性別': genders,
-                        });
+                        };
+                        await FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(id)
+                            .set(data);
                       },
                     ),
                   ])),
