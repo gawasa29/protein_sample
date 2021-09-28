@@ -12,8 +12,6 @@ import 'Setting.dart';
 
 class ProfileScreen extends StatelessWidget {
   static final String path = "lib/src/pages/profile/profile5.dart";
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('books').snapshots();
   @override
   Widget build(BuildContext context) {
     final Color color1 = Colors.grey.shade700;
@@ -73,8 +71,8 @@ class ProfileScreen extends StatelessWidget {
                   FutureBuilder<DocumentSnapshot>(
                     //プロフィール名前欄
                     future: FirebaseFirestore.instance
-                        .collection('books')
-                        .doc('6ldUGwjUOcGQyPJ0J95S')
+                        .collection('users')
+                        .doc('qXKVVw4HtyYJCN3IvOkK')
                         .get(),
                     builder: (BuildContext context,
                         AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -142,76 +140,11 @@ class ProfileScreen extends StatelessWidget {
                     indent: 1,
                     endIndent: 1,
                   ),
-                  ElevatedButton(
-                    child: const Text('Button'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.orange,
-                      onPrimary: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => gawasiko()),
-                      );
-                    },
-                  ),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class gawasiko extends StatefulWidget {
-  const gawasiko({Key? key}) : super(key: key);
-
-  @override
-  _gawasikoState createState() => _gawasikoState();
-}
-
-class _gawasikoState extends State<gawasiko> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Bookテスト'),
-      ),
-      body: Center(
-        //これがどうやら非同期処理の別の書き方？
-        child: FutureBuilder<DocumentSnapshot>(
-          future: FirebaseFirestore.instance
-              //コレクション名
-              .collection('books')
-              //ドキュメントID
-              .doc('olIIinWDPszl9H9JhIEE')
-              .get(),
-          builder:
-              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-            // if (snapshot.hasError) {
-            //   return Text("Something went wrong");
-            // }
-
-            // if (snapshot.hasData && !snapshot.data!.exists) {
-            //   return Text("Document does not exist");
-            // }
-
-            if (snapshot.connectionState == ConnectionState.done) {
-              Map<String, dynamic> data =
-                  snapshot.data!.data() as Map<String, dynamic>;
-              return Text("Full Name: ${data['マギカ']} ${data['マジが']}");
-            }
-
-            return Text("loading");
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }

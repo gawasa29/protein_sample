@@ -13,7 +13,7 @@ class NameScreen extends StatefulWidget {
 
 class _NameScreenState extends State<NameScreen> {
   final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('books').snapshots();
+      FirebaseFirestore.instance.collection('users').snapshots();
   List<bool> _selections = List.generate(3, (_) => false);
   //入力された名前
   String name = "";
@@ -163,7 +163,7 @@ class _NameScreenState extends State<NameScreen> {
                       ),
                     ),
                     ElevatedButton(
-                      child: const Text('Button'),
+                      child: const Text('送信'),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.orange,
                         onPrimary: Colors.white,
@@ -171,7 +171,7 @@ class _NameScreenState extends State<NameScreen> {
                       onPressed: () async {
                         //cloud_firestoreに追加のコード
                         await FirebaseFirestore.instance
-                            .collection('books')
+                            .collection('users')
                             .add({
                           '名前': name,
                           '誕生日': birthday,

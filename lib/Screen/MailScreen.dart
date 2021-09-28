@@ -84,6 +84,14 @@ class _MailScreenState extends State<MailScreen> {
                     SizedBox(
                       height: 66,
                     ),
+                    // 登録失敗時のエラーメッセージ
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 5.0),
+                      child: Text(
+                        infoText,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
                     SizedBox(
                       height: 50,
                       width: 300,
@@ -120,7 +128,7 @@ class _MailScreenState extends State<MailScreen> {
                           } catch (e) {
                             // 登録に失敗した場合
                             setState(() {
-                              infoText = "登録NG：${e.toString()}";
+                              infoText = "失敗しました";
                             });
                           }
                         },
@@ -141,18 +149,19 @@ class EmailCheckScreen extends StatefulWidget {
 
 class _EmailCheckScreenState extends State<EmailCheckScreen> {
   User? user = FirebaseAuth.instance.currentUser;
+  String _infoText = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("がわs"),
+        title: Text("メールアドレスの確認"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              child: const Text('Button'),
+              child: const Text('確認しました'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.orange,
                 onPrimary: Colors.white,
@@ -164,6 +173,7 @@ class _EmailCheckScreenState extends State<EmailCheckScreen> {
                     email: newUserEmail,
                     password: newUserPassword,
                   );
+                  //中身確認
                   print(userCredential.user?.emailVerified);
                   if (userCredential.user!.emailVerified) {
                     Navigator.push(
@@ -172,20 +182,24 @@ class _EmailCheckScreenState extends State<EmailCheckScreen> {
                           builder: (context) => TermsofuseScreen(),
                         ));
                   } else {
-                    print("失敗");
+                    setState(() {
+                      _infoText = "確認が終わっていません";
+                    });
                   }
                 } catch (e) {
                   print('NG');
                 }
               },
             ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 5.0),
+              child: Text(
+                _infoText,
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
