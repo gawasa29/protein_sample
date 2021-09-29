@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:protein_sample/HomePage.dart';
+import 'package:protein_sample/Screen/NameScreen.dart';
 
 class AddPhotoScreen extends StatefulWidget {
   const AddPhotoScreen({Key? key}) : super(key: key);
@@ -15,27 +16,27 @@ class AddPhotoScreen extends StatefulWidget {
 }
 
 class _AddPhotoScreenState extends State<AddPhotoScreen> {
-  File? _image;
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('users').snapshots();
+  // final Stream<QuerySnapshot> _usersStream =
+  //     FirebaseFirestore.instance.collection('users').snapshots();
 
-  final doc = FirebaseFirestore.instance.collection('users').doc();
-  Future addBook() async {
+  //Cloud Storageのやつ
+  Future addPhoto() async {
     String? imgURL;
 
     if (_image != null) {
       final task = await FirebaseStorage.instance
-          .ref('users/${doc.id}')
+          .ref('users/$users_id')
           .putFile(_image!);
       imgURL = await task.ref.getDownloadURL();
     }
     //firestoreに追加
-    SetOptions(merge: true);
-    await doc.set({
+    await FirebaseFirestore.instance.collection('users').doc(users_id).set({
       'imgURL': imgURL,
-    });
+    }, SetOptions(merge: true));
   }
 
+  //image_pickerのやつ
+  File? _image;
   final picker = ImagePicker();
   Future getImageFromGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -93,7 +94,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                         onPrimary: Colors.white,
                       ),
                       onPressed: () {
-                        addBook();
+                        addPhoto();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => MyHomePage()),

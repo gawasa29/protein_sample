@@ -80,11 +80,6 @@ class ProfileScreen extends StatelessWidget {
                       return Image.network(data['imgURL']);
                     },
                   ),
-                  CircleAvatar(
-                    radius: 150.0,
-                    backgroundImage: NetworkImage(
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mona_Lisa_detail_face.jpg/420px-Mona_Lisa_detail_face.jpg"),
-                  ),
                   SizedBox(height: 20.0),
                   FutureBuilder<DocumentSnapshot>(
                     //プロフィール名前欄
@@ -100,9 +95,7 @@ class ProfileScreen extends StatelessWidget {
                       if (data == null) {
                         return CircularProgressIndicator();
                       }
-
                       return Text(data['名前']);
-                      return Image.network(data['imgURL']);
                     },
                   ),
                   Row(
