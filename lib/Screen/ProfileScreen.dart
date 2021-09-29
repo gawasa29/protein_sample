@@ -63,6 +63,23 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     height: 100,
                   ),
+                  FutureBuilder<DocumentSnapshot>(
+                    //プロフィール名前欄
+                    future: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(users_id)
+                        .get(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      Map<String, dynamic> data =
+                          snapshot.data?.data() as Map<String, dynamic>;
+                      //ヌルの場合サークルがクルクル回る
+                      if (data == null) {
+                        return CircularProgressIndicator();
+                      }
+                      return Image.network(data['imgURL']);
+                    },
+                  ),
                   CircleAvatar(
                     radius: 150.0,
                     backgroundImage: NetworkImage(
@@ -83,7 +100,9 @@ class ProfileScreen extends StatelessWidget {
                       if (data == null) {
                         return CircularProgressIndicator();
                       }
+
                       return Text(data['名前']);
+                      return Image.network(data['imgURL']);
                     },
                   ),
                   Row(
